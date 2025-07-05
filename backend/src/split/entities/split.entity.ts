@@ -8,9 +8,9 @@ export class Split {
   @Column({ type: 'int' })
   recipient_id: number;
 
-  @Column({ type: 'decimal', precision: 10, scale: 2 })
+  @Column({ type: 'int' })
   amount: number;
 
-  @Column({ type: 'decimal', precision: 10, scale: 2 })
+  @Column({ type: 'int' })
   net_amount: number;
 }

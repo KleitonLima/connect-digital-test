@@ -11,7 +11,7 @@ export class Item {
   @Column()
   title: string;
 
-  @Column({ type: 'decimal', precision: 10, scale: 2 })
+  @Column({ type: 'int' })
   unit_price: number;
 
   @Column({ type: 'int' })
