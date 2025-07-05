@@ -8,9 +8,10 @@ import { ItemModule } from './item/item.module';
 import { SplitModule } from './split/split.module';
 import { FeeModule } from './fee/fee.module';
 import { TransactionModule } from './transaction/transaction.module';
+import { WebhookModule } from './webhook/webhook.module';
 
 @Module({
-  imports: [AddressModule, CustomerModule, CardModule, ItemModule, SplitModule, FeeModule, TransactionModule],
+  imports: [AddressModule, CustomerModule, CardModule, ItemModule, SplitModule, FeeModule, TransactionModule, WebhookModule],
   controllers: [AppController],
   providers: [AppService],
 })
