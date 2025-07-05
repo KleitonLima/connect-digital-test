@@ -1,4 +1,5 @@
-import { Entity, PrimaryColumn, Column } from 'typeorm';
+import { Entity, PrimaryColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
+import { Transaction } from '../../transaction/entities/transaction.entity';
 
 @Entity()
 export class Item {
@@ -19,4 +20,11 @@ export class Item {
 
   @Column({ type: 'boolean' })
   tangible: boolean;
+
+  @Column({ type: 'int' })
+  transaction_id: number;
+
+  @ManyToOne(() => Transaction, (transaction) => transaction.items)
+  @JoinColumn({ name: 'transaction_id' })
+  transaction: Transaction;
 }

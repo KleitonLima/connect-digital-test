@@ -1,4 +1,5 @@
-import { Entity, PrimaryColumn, Column } from 'typeorm';
+import { Entity, PrimaryColumn, Column, OneToOne, JoinColumn } from 'typeorm';
+import { Transaction } from '../../transaction/entities/transaction.entity';
 
 @Entity()
 export class Fee {
@@ -16,4 +17,11 @@ export class Fee {
 
   @Column({ type: 'int' })
   net_amount: number;
+
+  @Column({ type: 'int' })
+  transaction_id: number;
+
+  @OneToOne(() => Transaction, (transaction) => transaction.fee)
+  @JoinColumn({ name: 'transaction_id' })
+  transaction: Transaction;
 }

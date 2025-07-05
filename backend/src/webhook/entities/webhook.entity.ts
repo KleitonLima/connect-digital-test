@@ -1,4 +1,5 @@
-import { Entity, PrimaryColumn, Column } from 'typeorm';
+import { Entity, PrimaryColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
+import { Transaction } from '../../transaction/entities/transaction.entity';
 
 @Entity()
 export class Webhook {
@@ -13,4 +14,11 @@ export class Webhook {
 
   @Column()
   url: string;
+
+  @ManyToOne(() => Transaction, (transaction) => transaction.webhooks)
+  @JoinColumn({
+    name: 'object_id',
+    referencedColumnName: 'id',
+  })
+  transaction: Transaction;
 }

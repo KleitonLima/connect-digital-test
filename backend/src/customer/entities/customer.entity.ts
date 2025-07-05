@@ -1,4 +1,13 @@
-import { Entity, PrimaryColumn, Column, CreateDateColumn } from 'typeorm';
+import {
+  Entity,
+  PrimaryColumn,
+  Column,
+  CreateDateColumn,
+  OneToMany,
+  OneToOne,
+} from 'typeorm';
+import { Transaction } from '../../transaction/entities/transaction.entity';
+import { Address } from '../../address/entities/address.entity';
 
 @Entity()
 export class Customer {
@@ -28,4 +37,10 @@ export class Customer {
 
   @Column()
   document_number: string;
+
+  @OneToMany(() => Transaction, (transaction) => transaction.customer)
+  transactions: Transaction[];
+
+  @OneToOne(() => Address, (address) => address.customer)
+  address: Address;
 }

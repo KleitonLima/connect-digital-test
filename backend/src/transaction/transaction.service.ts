@@ -62,17 +62,13 @@ export class TransactionService {
   async findAllWithFilters(filters: any): Promise<any[]> {
     const queryBuilder = this.transactionRepository
       .createQueryBuilder('transaction')
-      .leftJoin('customer', 'customer', 'customer.id = transaction.id')
-      .leftJoin('address', 'address', 'address.id = customer.id')
-      .leftJoin('card', 'card', 'card.id = transaction.id')
-      .leftJoin('item', 'item', 'item.id = transaction.id')
-      .leftJoin('split', 'split', 'split.id = transaction.id')
-      .leftJoin('fee', 'fee', 'fee.id = transaction.id')
-      .leftJoin(
-        'webhook',
-        'webhook',
-        'webhook.object_id = CAST(transaction.id AS VARCHAR)',
-      )
+      .leftJoin('transaction.customer', 'customer')
+      .leftJoin('customer.address', 'address')
+      .leftJoin('transaction.card', 'card')
+      .leftJoin('transaction.items', 'item')
+      .leftJoin('transaction.splits', 'split')
+      .leftJoin('transaction.fee', 'fee')
+      .leftJoin('transaction.webhooks', 'webhook')
       .select([
         'transaction.id as id',
         'transaction.amount as amount',

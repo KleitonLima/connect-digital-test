@@ -1,4 +1,11 @@
-import { Entity, PrimaryColumn, Column, CreateDateColumn } from 'typeorm';
+import {
+  Entity,
+  PrimaryColumn,
+  Column,
+  CreateDateColumn,
+  OneToMany,
+} from 'typeorm';
+import { Transaction } from '../../transaction/entities/transaction.entity';
 
 @Entity()
 export class Card {
@@ -25,4 +32,7 @@ export class Card {
 
   @CreateDateColumn()
   created_at: Date;
+
+  @OneToMany(() => Transaction, (transaction) => transaction.card)
+  transactions: Transaction[];
 }

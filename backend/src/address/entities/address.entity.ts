@@ -1,4 +1,5 @@
-import { Entity, PrimaryColumn, Column } from 'typeorm';
+import { Entity, PrimaryColumn, Column, OneToOne, JoinColumn } from 'typeorm';
+import { Customer } from '../../customer/entities/customer.entity';
 
 @Entity()
 export class Address {
@@ -28,4 +29,11 @@ export class Address {
 
   @Column({ length: 2 })
   country: string;
+
+  @Column({ type: 'int' })
+  customer_id: number;
+
+  @OneToOne(() => Customer, (customer) => customer.address)
+  @JoinColumn({ name: 'customer_id' })
+  customer: Customer;
 }
