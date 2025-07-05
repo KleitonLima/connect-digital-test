@@ -12,9 +12,11 @@ export class ItemService {
   ) {}
 
   async create(createItemDto: CreateItemDto): Promise<Item> {
-    const { externalRef, title, unitPrice, quantity, tangible } = createItemDto;
+    const { id, externalRef, title, unitPrice, quantity, tangible } =
+      createItemDto;
 
     const item = this.itemRepository.create({
+      id,
       external_ref: externalRef || null,
       title,
       unit_price: unitPrice,

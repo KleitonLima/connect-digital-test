@@ -2,6 +2,9 @@ import { IsInt, Min, Max } from 'class-validator';
 
 export class CreateFeeDto {
   @IsInt()
+  id: number;
+
+  @IsInt()
   @Min(0)
   fixedAmount: number;
 

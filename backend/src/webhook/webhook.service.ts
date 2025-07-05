@@ -12,9 +12,10 @@ export class WebhookService {
   ) {}
 
   async create(createWebhookDto: CreateWebhookDto): Promise<Webhook> {
-    const { type, objectId, url } = createWebhookDto;
+    const { id, type, objectId, url } = createWebhookDto;
 
     const webhook = this.webhookRepository.create({
+      id,
       type,
       object_id: objectId,
       url,

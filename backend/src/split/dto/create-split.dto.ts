@@ -2,6 +2,9 @@ import { IsInt, Min } from 'class-validator';
 
 export class CreateSplitDto {
   @IsInt()
+  id: number;
+
+  @IsInt()
   @Min(1)
   recipientId: number;
 

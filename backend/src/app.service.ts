@@ -55,6 +55,7 @@ export class AppService {
       const feeResult = await this.feeService.create(transactionData.fee);
 
       const webhookData = {
+        id: data.id,
         type: data.type,
         objectId: data.objectId,
         url: data.url,

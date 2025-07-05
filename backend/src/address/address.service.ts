@@ -13,6 +13,7 @@ export class AddressService {
 
   async create(createAddressDto: CreateAddressDto): Promise<Address> {
     const {
+      id,
       street,
       streetNumber,
       complement,
@@ -24,6 +25,7 @@ export class AddressService {
     } = createAddressDto;
 
     const address = this.addressRepository.create({
+      id,
       street,
       street_number: streetNumber,
       complement: complement || null,

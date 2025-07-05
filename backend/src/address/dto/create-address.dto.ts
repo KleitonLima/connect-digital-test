@@ -2,11 +2,15 @@ import {
   IsString,
   IsOptional,
   IsNotEmpty,
+  IsInt,
   Length,
   Matches,
 } from 'class-validator';
 
 export class CreateAddressDto {
+  @IsInt()
+  id: number;
+
   @IsString()
   @IsNotEmpty()
   street: string;

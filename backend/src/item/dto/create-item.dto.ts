@@ -8,6 +8,9 @@ import {
 } from 'class-validator';
 
 export class CreateItemDto {
+  @IsInt()
+  id: number;
+
   @IsString()
   @IsOptional()
   externalRef?: string | null;
