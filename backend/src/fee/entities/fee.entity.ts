@@ -1,15 +1,18 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity()
-export class Split {
+export class Fee {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column({ type: 'int' })
-  recipient_id: number;
+  fixed_amount: number;
 
   @Column({ type: 'int' })
-  amount: number;
+  spread_percentage: number;
+
+  @Column({ type: 'int' })
+  estimated_fee: number;
 
   @Column({ type: 'int' })
   net_amount: number;

@@ -2,7 +2,6 @@ import {
   IsString,
   IsOptional,
   IsNotEmpty,
-  IsNumber,
   IsInt,
   IsBoolean,
   Min,
@@ -17,7 +16,7 @@ export class CreateItemDto {
   @IsNotEmpty()
   title: string;
 
-  @IsNumber({ maxDecimalPlaces: 2 })
+  @IsInt()
   @Min(0)
   unit_price: number;
 
