@@ -13,7 +13,7 @@ export class CreateAddressDto {
 
   @IsString()
   @IsNotEmpty()
-  street_number: string;
+  streetNumber: string;
 
   @IsString()
   @IsOptional()
@@ -22,7 +22,7 @@ export class CreateAddressDto {
   @IsString()
   @IsNotEmpty()
   @Matches(/^\d{8}$/, { message: 'zipCode must be exactly 8 digits' })
-  zip_code: string;
+  zipCode: string;
 
   @IsString()
   @IsNotEmpty()

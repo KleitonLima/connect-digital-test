@@ -10,7 +10,7 @@ export class CreateWebhookDto {
 
   @IsString()
   @IsNotEmpty()
-  object_id: string;
+  objectId: string;
 
   @IsString()
   @IsUrl()

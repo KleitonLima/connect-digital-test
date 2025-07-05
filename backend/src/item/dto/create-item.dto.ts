@@ -10,7 +10,7 @@ import {
 export class CreateItemDto {
   @IsString()
   @IsOptional()
-  external_ref?: string | null;
+  externalRef?: string | null;
 
   @IsString()
   @IsNotEmpty()
@@ -18,7 +18,7 @@ export class CreateItemDto {
 
   @IsInt()
   @Min(0)
-  unit_price: number;
+  unitPrice: number;
 
   @IsInt()
   @Min(1)
