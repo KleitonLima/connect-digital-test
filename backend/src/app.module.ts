@@ -7,9 +7,10 @@ import { CardModule } from './card/card.module';
 import { ItemModule } from './item/item.module';
 import { SplitModule } from './split/split.module';
 import { FeeModule } from './fee/fee.module';
+import { TransactionModule } from './transaction/transaction.module';
 
 @Module({
-  imports: [AddressModule, CustomerModule, CardModule, ItemModule, SplitModule, FeeModule],
+  imports: [AddressModule, CustomerModule, CardModule, ItemModule, SplitModule, FeeModule, TransactionModule],
   controllers: [AppController],
   providers: [AppService],
 })
