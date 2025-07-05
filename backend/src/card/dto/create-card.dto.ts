@@ -3,6 +3,8 @@ import {
   IsNotEmpty,
   IsInt,
   IsBoolean,
+  IsDateString,
+  IsOptional,
   Min,
   Max,
   Length,
@@ -10,6 +12,10 @@ import {
 } from 'class-validator';
 
 export class CreateCardDto {
+  @IsInt()
+  @IsOptional()
+  id?: number;
+
   @IsString()
   @IsNotEmpty()
   @IsIn(['visa', 'mastercard', 'amex', 'elo', 'diners', 'hipercard'], {
@@ -19,22 +25,26 @@ export class CreateCardDto {
 
   @IsString()
   @IsNotEmpty()
-  holder_name: string;
+  holderName: string;
 
   @IsString()
   @IsNotEmpty()
-  @Length(4, 4, { message: 'last_digits must be exactly 4 digits' })
-  last_digits: string;
+  @Length(4, 4, { message: 'lastDigits must be exactly 4 digits' })
+  lastDigits: string;
 
   @IsInt()
   @Min(1)
   @Max(12)
-  expiration_month: number;
+  expirationMonth: number;
 
   @IsInt()
   @Min(2023)
-  expiration_year: number;
+  expirationYear: number;
 
   @IsBoolean()
   reusable: boolean;
+
+  @IsDateString()
+  @IsOptional()
+  createdAt?: string;
 }
