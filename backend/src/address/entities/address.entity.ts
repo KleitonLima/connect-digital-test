@@ -9,13 +9,13 @@ export class Address {
   street: string;
 
   @Column()
-  streetNumber: string;
+  street_number: string;
 
   @Column({ nullable: true })
   complement: string | null;
 
   @Column({ length: 8 })
-  zipCode: string;
+  zip_code: string;
 
   @Column()
   neighborhood: string;
