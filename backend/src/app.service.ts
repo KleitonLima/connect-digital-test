@@ -103,4 +103,28 @@ export class AppService {
       };
     }
   }
+
+  async getTransactions(filters?: any) {
+    try {
+      const transactions =
+        filters && Object.keys(filters).length > 0
+          ? await this.transactionService.findAllWithFilters(filters)
+          : await this.transactionService.findAll();
+
+      return {
+        success: true,
+        message: 'Transações recuperadas com sucesso',
+        data: transactions,
+        count: transactions.length,
+      };
+    } catch (error) {
+      console.error('Erro ao buscar transações:', error);
+
+      return {
+        success: false,
+        message: 'Erro ao buscar transações',
+        error: error.message,
+      };
+    }
+  }
 }
