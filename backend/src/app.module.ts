@@ -6,9 +6,10 @@ import { CustomerModule } from './customer/customer.module';
 import { CardModule } from './card/card.module';
 import { ItemModule } from './item/item.module';
 import { SplitModule } from './split/split.module';
+import { FeeModule } from './fee/fee.module';
 
 @Module({
-  imports: [AddressModule, CustomerModule, CardModule, ItemModule, SplitModule],
+  imports: [AddressModule, CustomerModule, CardModule, ItemModule, SplitModule, FeeModule],
   controllers: [AppController],
   providers: [AppService],
 })
