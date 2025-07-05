@@ -27,7 +27,7 @@ export class AppService {
     return `Server is running! 🚀\n Please check <a href="http://localhost:${ENVCONFIG.PORT}/api/v0/docs">http://localhost:${ENVCONFIG.PORT}/api/v0/docs</a> for Swagger docs...`;
   }
 
-  async receiveWebhook(data: WebhookPayloadDto) {
+  async transactionsWebhook(data: WebhookPayloadDto) {
     try {
       const transactionData = data.data;
 
