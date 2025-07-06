@@ -32,42 +32,25 @@ export class AppService {
       const transactionData = data.data;
       const { customer, card, items, splits, fee } = transactionData;
 
-      const addressDataWithCustomerId = {
+      const addressResult = await this.addressService.create({
         ...customer.address,
         customerId: customer.id,
-      };
+      });
 
-      const customerData = {
+      const customerResult = await this.customerService.create({
         ...customer,
-        address: undefined,
-        document: undefined,
         documentType: customer.document.type,
         documentNumber: customer.document.number,
         createdAt: customer.createdAt,
-      };
-
-      const addressResult = await this.addressService.create(
-        addressDataWithCustomerId,
-      );
-
-      const customerResult = await this.customerService.create(customerData);
+      });
 
       const cardResult = await this.cardService.create(card);
 
-      const transactionDataToSave = {
+      const transactionResult = await this.transactionService.create({
         ...transactionData,
-        customer: undefined,
-        card: undefined,
-        items: undefined,
-        splits: undefined,
-        fee: undefined,
         customerId: customerResult.id,
         cardId: cardResult?.id || null,
-      };
-
-      const transactionResult = await this.transactionService.create(
-        transactionDataToSave,
-      );
+      });
 
       const itemResults = await Promise.all(
         items.map((item) =>
