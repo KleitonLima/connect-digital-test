@@ -23,6 +23,7 @@ export class CardService {
       expirationMonth,
       expirationYear,
       reusable,
+      createdAt,
     } = createCardDto;
 
     const card = this.cardRepository.create({
@@ -33,6 +34,7 @@ export class CardService {
       expiration_month: expirationMonth,
       expiration_year: expirationYear,
       reusable,
+      created_at: createdAt,
     });
 
     if (queryRunner) {
