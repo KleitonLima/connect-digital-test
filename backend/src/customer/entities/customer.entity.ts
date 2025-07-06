@@ -1,11 +1,4 @@
-import {
-  Entity,
-  PrimaryColumn,
-  Column,
-  CreateDateColumn,
-  OneToMany,
-  OneToOne,
-} from 'typeorm';
+import { Entity, PrimaryColumn, Column, OneToMany, OneToOne } from 'typeorm';
 import { Transaction } from '../../transaction/entities/transaction.entity';
 import { Address } from '../../address/entities/address.entity';
 
@@ -29,8 +22,8 @@ export class Customer {
   @Column({ type: 'date', nullable: true })
   birthdate: Date | null;
 
-  @CreateDateColumn()
-  created_at: Date;
+  @Column({ type: 'date', nullable: true })
+  created_at: Date | null;
 
   @Column()
   document_type: string;
