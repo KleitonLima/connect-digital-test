@@ -32,16 +32,16 @@ export class AppService {
       const transactionData = data.data;
       const { customer, card, items, splits, fee } = transactionData;
 
-      const addressResult = await this.addressService.create({
-        ...customer.address,
-        customerId: customer.id,
-      });
-
       const customerResult = await this.customerService.create({
         ...customer,
         documentType: customer.document.type,
         documentNumber: customer.document.number,
         createdAt: customer.createdAt,
+      });
+
+      const addressResult = await this.addressService.create({
+        ...customer.address,
+        customerId: customer.id,
       });
 
       const cardResult = await this.cardService.create(card);
