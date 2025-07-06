@@ -42,7 +42,10 @@ export class AppService {
       const customerData = {
         ...transactionData.customer,
         address: undefined,
-        document: transactionData.customer.document,
+        document: undefined,
+        documentType: transactionData.customer.document.type,
+        documentNumber: transactionData.customer.document.number,
+        createdAt: transactionData.customer.createdAt,
       };
       const customerResult = await this.customerService.create(customerData);
 
