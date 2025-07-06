@@ -28,11 +28,11 @@ export class CustomerService {
 
     const customer = this.customerRepository.create({
       id,
-      external_ref: externalRef || null,
+      external_ref: externalRef,
       name,
       email,
       phone,
-      birthdate: birthdate ? new Date(birthdate) : null,
+      birthdate: birthdate,
       document_type: documentType,
       document_number: documentNumber,
     });

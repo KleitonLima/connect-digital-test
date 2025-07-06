@@ -19,7 +19,7 @@ export class ItemService {
       createItemDto;
 
     const item = this.itemRepository.create({
-      external_ref: externalRef || null,
+      external_ref: externalRef,
       title,
       unit_price: unitPrice,
       quantity,

@@ -30,7 +30,7 @@ export class AddressService {
     const address = this.addressRepository.create({
       street,
       street_number: streetNumber,
-      complement: complement || null,
+      complement: complement,
       zip_code: zipCode,
       neighborhood,
       city,
