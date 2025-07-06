@@ -29,28 +29,36 @@ export class AppService {
 
   async transactionsWebhook(data: WebhookPayloadDto) {
     try {
+      // Extrair dados principais do webhook
       const transactionData = data.data;
+      const { customer, card, items, splits, fee } = transactionData;
 
+      // Preparar dados do endereço
       const addressDataWithCustomerId = {
-        ...transactionData.customer.address,
-        customerId: transactionData.customer.id,
+        ...customer.address,
+        customerId: customer.id,
       };
+
+      // Preparar dados do cliente
+      const customerData = {
+        ...customer,
+        address: undefined,
+        document: undefined,
+        documentType: customer.document.type,
+        documentNumber: customer.document.number,
+        createdAt: customer.createdAt,
+      };
+
+      // Criar registros relacionados
       const addressResult = await this.addressService.create(
         addressDataWithCustomerId,
       );
 
-      const customerData = {
-        ...transactionData.customer,
-        address: undefined,
-        document: undefined,
-        documentType: transactionData.customer.document.type,
-        documentNumber: transactionData.customer.document.number,
-        createdAt: transactionData.customer.createdAt,
-      };
       const customerResult = await this.customerService.create(customerData);
 
-      const cardResult = await this.cardService.create(transactionData.card);
+      const cardResult = await this.cardService.create(card);
 
+      // Preparar dados da transação
       const transactionDataToSave = {
         ...transactionData,
         customer: undefined,
@@ -67,7 +75,7 @@ export class AppService {
       );
 
       const itemResults = await Promise.all(
-        transactionData.items.map((item) =>
+        items.map((item) =>
           this.itemService.create({
             ...item,
             transactionId: transactionResult.id,
@@ -76,7 +84,7 @@ export class AppService {
       );
 
       const splitResults = await Promise.all(
-        transactionData.splits.map((split) =>
+        splits.map((split) =>
           this.splitService.create({
             ...split,
             transactionId: transactionResult.id,
@@ -85,7 +93,7 @@ export class AppService {
       );
 
       const feeResult = await this.feeService.create({
-        ...transactionData.fee,
+        ...fee,
         transactionId: transactionResult.id,
       });
 
