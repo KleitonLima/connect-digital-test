@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, QueryRunner } from 'typeorm';
 import { CreateWebhookDto } from './dto/create-webhook.dto';
 import { Webhook } from './entities/webhook.entity';
 
@@ -11,7 +11,10 @@ export class WebhookService {
     private readonly webhookRepository: Repository<Webhook>,
   ) {}
 
-  async create(createWebhookDto: CreateWebhookDto): Promise<Webhook> {
+  async create(
+    createWebhookDto: CreateWebhookDto,
+    queryRunner?: QueryRunner,
+  ): Promise<Webhook> {
     const { id, type, objectId, url } = createWebhookDto;
 
     const webhook = this.webhookRepository.create({
@@ -21,6 +24,9 @@ export class WebhookService {
       url,
     });
 
+    if (queryRunner) {
+      return await queryRunner.manager.save(Webhook, webhook);
+    }
     return await this.webhookRepository.save(webhook);
   }
 
