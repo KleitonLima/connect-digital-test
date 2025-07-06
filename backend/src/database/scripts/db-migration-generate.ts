@@ -12,7 +12,7 @@ async function run() {
   const migrationName = argv.name;
 
   exec(
-    `typeorm-ts-node-commonjs -d ./src/database/config/typeorm.db.ts migration:generate ./src/database/migrations/${migrationName}`,
+    `typeorm-ts-node-commonjs -d ./src/database/typeorm.db.ts migration:generate ./src/database/migrations/${migrationName}`,
     (error, stdout, stderr) => {
       if (error) {
         console.error(`Error: ${error.message}`);
