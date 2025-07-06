@@ -16,6 +16,7 @@ export class TransactionService {
     queryRunner?: QueryRunner,
   ): Promise<Transaction> {
     const {
+      id,
       amount,
       refundedAmount,
       companyId,
@@ -35,6 +36,7 @@ export class TransactionService {
     } = createTransactionDto;
 
     const transaction = this.transactionRepository.create({
+      id,
       amount,
       refunded_amount: refundedAmount,
       company_id: companyId,
