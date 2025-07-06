@@ -17,11 +17,11 @@ export class TransactionFiltersDto {
 
   @IsOptional()
   @IsNumber()
-  refunded_amount?: number;
+  refundedAmount?: number;
 
   @IsOptional()
   @IsNumber()
-  company_id?: number;
+  companyId?: number;
 
   @IsOptional()
   @IsNumber()
@@ -29,7 +29,7 @@ export class TransactionFiltersDto {
 
   @IsOptional()
   @IsString()
-  payment_method?: string;
+  paymentMethod?: string;
 
   @IsOptional()
   @IsString()
@@ -37,7 +37,7 @@ export class TransactionFiltersDto {
 
   @IsOptional()
   @IsString()
-  postback_url?: string;
+  postbackUrl?: string;
 
   @IsOptional()
   @IsBoolean()
@@ -45,11 +45,11 @@ export class TransactionFiltersDto {
 
   @IsOptional()
   @IsString()
-  secure_id?: string;
+  secureId?: string;
 
   @IsOptional()
   @IsString()
-  secure_url?: string;
+  secureUrl?: string;
 
   @IsOptional()
   @IsString()
@@ -57,179 +57,179 @@ export class TransactionFiltersDto {
 
   @IsOptional()
   @IsString()
-  external_ref?: string;
+  externalRef?: string;
 
   @IsOptional()
   @IsDate()
-  paid_at?: Date;
+  paidAt?: Date;
 
   @IsOptional()
   @IsDate()
-  created_at?: Date;
+  createdAt?: Date;
 
   @IsOptional()
   @IsDate()
-  updated_at?: Date;
+  updatedAt?: Date;
 
   @IsOptional()
   @IsString()
-  customer_name?: string;
+  customerName?: string;
 
   @IsOptional()
   @IsString()
-  customer_email?: string;
+  customerEmail?: string;
 
   @IsOptional()
   @IsString()
-  customer_phone?: string;
+  customerPhone?: string;
 
   @IsOptional()
   @IsString()
-  customer_external_ref?: string;
+  customerExternalRef?: string;
 
   @IsOptional()
   @IsDate()
-  customer_birthdate?: Date;
+  customerBirthdate?: Date;
 
   @IsOptional()
   @IsString()
-  customer_document_type?: string;
+  customerDocumentType?: string;
 
   @IsOptional()
   @IsString()
-  customer_document_number?: string;
+  customerDocumentNumber?: string;
 
   @IsOptional()
   @IsDate()
-  customer_created_at?: Date;
+  customerCreatedAt?: Date;
 
   @IsOptional()
   @IsString()
-  document_number?: string;
+  documentNumber?: string;
 
   @IsOptional()
   @IsString()
-  document_type?: string;
+  documentType?: string;
 
   @IsOptional()
   @IsString()
-  address_street?: string;
+  addressStreet?: string;
 
   @IsOptional()
   @IsString()
-  address_street_number?: string;
+  addressStreetNumber?: string;
 
   @IsOptional()
   @IsString()
-  address_complement?: string;
+  addressComplement?: string;
 
   @IsOptional()
   @IsString()
-  address_zip_code?: string;
+  addressZipCode?: string;
 
   @IsOptional()
   @IsString()
-  address_neighborhood?: string;
+  addressNeighborhood?: string;
 
   @IsOptional()
   @IsString()
-  address_city?: string;
+  addressCity?: string;
 
   @IsOptional()
   @IsString()
-  address_state?: string;
+  addressState?: string;
 
   @IsOptional()
   @IsString()
-  address_country?: string;
+  addressCountry?: string;
 
   @IsOptional()
   @IsString()
-  card_brand?: string;
+  cardBrand?: string;
 
   @IsOptional()
   @IsString()
-  card_holder_name?: string;
+  cardHolderName?: string;
 
   @IsOptional()
   @IsString()
-  card_last_digits?: string;
+  cardLastDigits?: string;
 
   @IsOptional()
   @IsNumber()
-  card_expiration_month?: number;
+  cardExpirationMonth?: number;
 
   @IsOptional()
   @IsNumber()
-  card_expiration_year?: number;
+  cardExpirationYear?: number;
 
   @IsOptional()
   @IsBoolean()
-  card_reusable?: boolean;
+  cardReusable?: boolean;
 
   @IsOptional()
   @IsDate()
-  card_created_at?: Date;
+  cardCreatedAt?: Date;
 
   @IsOptional()
   @IsString()
-  item_external_ref?: string;
+  itemExternalRef?: string;
 
   @IsOptional()
   @IsString()
-  item_title?: string;
+  itemTitle?: string;
 
   @IsOptional()
   @IsNumber()
-  item_unit_price?: number;
+  itemUnitPrice?: number;
 
   @IsOptional()
   @IsNumber()
-  item_quantity?: number;
+  itemQuantity?: number;
 
   @IsOptional()
   @IsBoolean()
-  item_tangible?: boolean;
+  itemTangible?: boolean;
 
   @IsOptional()
   @IsNumber()
-  split_recipient_id?: number;
+  splitRecipientId?: number;
 
   @IsOptional()
   @IsNumber()
-  split_amount?: number;
+  splitAmount?: number;
 
   @IsOptional()
   @IsNumber()
-  split_net_amount?: number;
+  splitNetAmount?: number;
 
   @IsOptional()
   @IsNumber()
-  fee_fixed_amount?: number;
+  feeFixedAmount?: number;
 
   @IsOptional()
   @IsNumber()
-  fee_spread_percentage?: number;
+  feeSpreadPercentage?: number;
 
   @IsOptional()
   @IsNumber()
-  fee_estimated_fee?: number;
+  feeEstimatedFee?: number;
 
   @IsOptional()
   @IsNumber()
-  fee_net_amount?: number;
+  feeNetAmount?: number;
 
   @IsOptional()
   @IsString()
-  webhook_type?: string;
+  webhookType?: string;
 
   @IsOptional()
   @IsString()
-  webhook_object_id?: string;
+  webhookObjectId?: string;
 
   @IsOptional()
   @IsString()
-  webhook_url?: string;
+  webhookUrl?: string;
 
   @IsOptional()
   @IsString()
