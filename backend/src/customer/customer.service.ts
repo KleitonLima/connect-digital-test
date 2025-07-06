@@ -13,6 +13,7 @@ export class CustomerService {
 
   async create(createCustomerDto: CreateCustomerDto): Promise<Customer> {
     const {
+      id,
       externalRef,
       name,
       email,
@@ -23,6 +24,7 @@ export class CustomerService {
     } = createCustomerDto;
 
     const customer = this.customerRepository.create({
+      id,
       external_ref: externalRef || null,
       name,
       email,

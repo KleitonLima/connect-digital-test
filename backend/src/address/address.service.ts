@@ -36,6 +36,11 @@ export class AddressService {
       customer_id: customerId,
     });
 
+    console.log(
+      '🚀 ~ address.service.ts:39 ~ AddressService ~ create ~ address:',
+      address,
+    );
+
     return await this.addressRepository.save(address);
   }
 

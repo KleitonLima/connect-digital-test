@@ -13,6 +13,7 @@ export class CardService {
 
   async create(createCardDto: CreateCardDto): Promise<Card> {
     const {
+      id,
       brand,
       holderName,
       lastDigits,
@@ -22,6 +23,7 @@ export class CardService {
     } = createCardDto;
 
     const card = this.cardRepository.create({
+      id,
       brand,
       holder_name: holderName,
       last_digits: lastDigits,
