@@ -1,4 +1,4 @@
-import { IsInt, Min, Max } from 'class-validator';
+import { IsInt, Min, Max, IsOptional } from 'class-validator';
 
 export class CreateFeeDto {
   @IsInt()
@@ -18,6 +18,7 @@ export class CreateFeeDto {
   @Min(0)
   netAmount: number;
 
+  @IsOptional()
   @IsInt()
-  transactionId: number;
+  transactionId?: number;
 }

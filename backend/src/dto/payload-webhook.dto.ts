@@ -1,4 +1,4 @@
-import { IsString, IsNotEmpty, ValidateNested, IsArray } from 'class-validator';
+import { IsString, ValidateNested, IsArray } from 'class-validator';
 import { Type } from 'class-transformer';
 import { CreateCustomerDto } from '../customer/dto/create-customer.dto';
 import { CreateCardDto } from '../card/dto/create-card.dto';
@@ -21,11 +21,9 @@ export class WebhookCardDto extends CreateCardDto {}
 
 export class WebhookDocumentDto {
   @IsString()
-  @IsNotEmpty()
   number: string;
 
   @IsString()
-  @IsNotEmpty()
   type: string;
 }
 

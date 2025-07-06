@@ -2,7 +2,6 @@ import {
   IsInt,
   IsString,
   IsOptional,
-  IsNotEmpty,
   IsEmail,
   IsDateString,
   IsIn,
@@ -12,34 +11,31 @@ export class CreateCustomerDto {
   @IsInt()
   id: number;
 
-  @IsString()
   @IsOptional()
+  @IsString()
   externalRef?: string | null;
 
   @IsString()
-  @IsNotEmpty()
   name: string;
 
   @IsEmail()
-  @IsNotEmpty()
   email: string;
 
   @IsString()
-  @IsNotEmpty()
   phone: string;
 
-  @IsDateString()
   @IsOptional()
+  @IsDateString()
   birthdate?: Date | null;
 
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
   @IsIn(['cpf', 'cnpj'], { message: 'documentType must be either cpf or cnpj' })
-  documentType: string;
+  documentType?: string;
 
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
-  documentNumber: string;
+  documentNumber?: string;
 
   @IsDateString()
   createdAt: string;
