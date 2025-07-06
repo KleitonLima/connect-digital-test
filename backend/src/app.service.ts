@@ -31,8 +31,12 @@ export class AppService {
     try {
       const transactionData = data.data;
 
+      const addressDataWithCustomerId = {
+        ...transactionData.customer.address,
+        customerId: transactionData.customer.id,
+      };
       const addressResult = await this.addressService.create(
-        transactionData.customer.address,
+        addressDataWithCustomerId,
       );
 
       const customerData = {
@@ -44,24 +48,6 @@ export class AppService {
 
       const cardResult = await this.cardService.create(transactionData.card);
 
-      const itemResults = await Promise.all(
-        transactionData.items.map((item) => this.itemService.create(item)),
-      );
-
-      const splitResults = await Promise.all(
-        transactionData.splits.map((split) => this.splitService.create(split)),
-      );
-
-      const feeResult = await this.feeService.create(transactionData.fee);
-
-      const webhookData = {
-        id: data.id,
-        type: data.type,
-        objectId: data.objectId,
-        url: data.url,
-      };
-      const webhookResult = await this.webhookService.create(webhookData);
-
       const transactionDataToSave = {
         ...transactionData,
         customer: undefined,
@@ -69,17 +55,50 @@ export class AppService {
         items: undefined,
         splits: undefined,
         fee: undefined,
+        customerId: customerResult.id,
+        cardId: cardResult?.id || null,
       };
 
       const transactionResult = await this.transactionService.create(
         transactionDataToSave,
       );
 
+      const itemResults = await Promise.all(
+        transactionData.items.map((item) =>
+          this.itemService.create({
+            ...item,
+            transactionId: transactionResult.id,
+          }),
+        ),
+      );
+
+      const splitResults = await Promise.all(
+        transactionData.splits.map((split) =>
+          this.splitService.create({
+            ...split,
+            transactionId: transactionResult.id,
+          }),
+        ),
+      );
+
+      const feeResult = await this.feeService.create({
+        ...transactionData.fee,
+        transactionId: transactionResult.id,
+      });
+
+      const webhookData = {
+        id: data.id,
+        type: data.type,
+        objectId: transactionResult.id.toString(),
+        url: data.url,
+      };
+      const webhookResult = await this.webhookService.create(webhookData);
+
       return {
         success: true,
         message: 'Webhook processado com sucesso',
         webhookId: data.id,
-        objectId: data.objectId,
+        objectId: transactionResult.id,
         results: {
           webhook: webhookResult,
           address: addressResult,
@@ -99,7 +118,7 @@ export class AppService {
         message: 'Erro ao processar webhook',
         error: error.message,
         webhookId: data.id,
-        objectId: data.objectId,
+        objectId: data.data?.id || null,
       };
     }
   }
