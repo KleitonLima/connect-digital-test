@@ -5,7 +5,7 @@ import { TypeOrmSubscriber } from './subscribe-typeorm.db';
 export const AppDataSource = new DataSource({
   type: 'postgres',
   url: ENVCONFIG.DATABASE_URL,
-  entities: [`${__dirname}/../../**/*.entity{.ts,.js}`],
+  entities: [`${__dirname}/**/*.entity{.ts,.js}`],
   migrations: [`${__dirname}/migrations/*{.ts,.js}`],
   subscribers: [TypeOrmSubscriber],
   multipleStatements: true,
