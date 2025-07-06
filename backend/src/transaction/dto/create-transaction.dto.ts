@@ -31,6 +31,14 @@ export class CreateTransactionDto {
 
   @IsInt()
   @Min(1)
+  customerId: number;
+
+  @IsInt()
+  @IsOptional()
+  cardId?: number | null;
+
+  @IsInt()
+  @Min(1)
   @Max(24)
   installments: number;
 

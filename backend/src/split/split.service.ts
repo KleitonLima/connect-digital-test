@@ -12,13 +12,15 @@ export class SplitService {
   ) {}
 
   async create(createSplitDto: CreateSplitDto): Promise<Split> {
-    const { id, recipientId, amount, netAmount } = createSplitDto;
+    const { id, recipientId, amount, netAmount, transactionId } =
+      createSplitDto;
 
     const split = this.splitRepository.create({
       id,
       recipient_id: recipientId,
       amount,
       net_amount: netAmount,
+      transaction_id: transactionId,
     });
 
     return await this.splitRepository.save(split);

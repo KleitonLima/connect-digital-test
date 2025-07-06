@@ -15,4 +15,7 @@ export class CreateSplitDto {
   @IsInt()
   @Min(0)
   netAmount: number;
+
+  @IsInt()
+  transactionId: number;
 }

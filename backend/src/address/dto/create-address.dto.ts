@@ -45,4 +45,7 @@ export class CreateAddressDto {
   @IsNotEmpty()
   @Length(2, 2, { message: 'country must be exactly 2 characters' })
   country: string;
+
+  @IsInt()
+  customerId: number;
 }

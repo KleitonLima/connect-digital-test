@@ -22,6 +22,7 @@ export class AddressService {
       city,
       state,
       country,
+      customerId,
     } = createAddressDto;
 
     const address = this.addressRepository.create({
@@ -34,6 +35,7 @@ export class AddressService {
       city,
       state,
       country,
+      customer_id: customerId,
     });
 
     return await this.addressRepository.save(address);

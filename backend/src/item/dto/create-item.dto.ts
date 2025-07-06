@@ -29,4 +29,7 @@ export class CreateItemDto {
 
   @IsBoolean()
   tangible: boolean;
+
+  @IsInt()
+  transactionId: number;
 }
