@@ -2,8 +2,6 @@ import {
   Entity,
   PrimaryColumn,
   Column,
-  CreateDateColumn,
-  UpdateDateColumn,
   ManyToOne,
   OneToOne,
   OneToMany,
@@ -15,6 +13,7 @@ import { Item } from '../../item/entities/item.entity';
 import { Split } from '../../split/entities/split.entity';
 import { Fee } from '../../fee/entities/fee.entity';
 import { Webhook } from '../../webhook/entities/webhook.entity';
+import { IsOptional } from 'class-validator';
 
 @Entity()
 export class Transaction {
@@ -60,10 +59,10 @@ export class Transaction {
   @Column()
   secure_url: string;
 
-  @CreateDateColumn()
+  @Column({ type: 'date' })
   created_at: Date;
 
-  @UpdateDateColumn()
+  @Column({ type: 'date' })
   updated_at: Date;
 
   @Column({ type: 'timestamp', nullable: true })
@@ -83,15 +82,18 @@ export class Transaction {
   @JoinColumn({ name: 'card_id' })
   card: Card | null;
 
+  @IsOptional()
   @OneToMany(() => Item, (item) => item.transaction)
   items: Item[];
-
+  @IsOptional()
   @OneToMany(() => Split, (split) => split.transaction)
   splits: Split[];
 
+  @IsOptional()
   @OneToOne(() => Fee, (fee) => fee.transaction)
   fee: Fee;
 
+  @IsOptional()
   @OneToMany(() => Webhook, (webhook) => webhook.transaction)
   webhooks: Webhook[];
 }

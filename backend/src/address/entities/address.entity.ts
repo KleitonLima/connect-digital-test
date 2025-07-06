@@ -6,6 +6,7 @@ import {
   JoinColumn,
 } from 'typeorm';
 import { Customer } from '../../customer/entities/customer.entity';
+import { IsOptional } from 'class-validator';
 
 @Entity()
 export class Address {
@@ -39,6 +40,7 @@ export class Address {
   @Column({ type: 'int' })
   customer_id: number;
 
+  @IsOptional()
   @OneToOne(() => Customer, (customer) => customer.address)
   @JoinColumn({ name: 'customer_id' })
   customer: Customer;

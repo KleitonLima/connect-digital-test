@@ -1,5 +1,6 @@
 import { Entity, PrimaryColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
 import { Transaction } from '../../transaction/entities/transaction.entity';
+import { IsOptional } from 'class-validator';
 
 @Entity()
 export class Webhook {
@@ -15,6 +16,7 @@ export class Webhook {
   @Column()
   url: string;
 
+  @IsOptional()
   @ManyToOne(() => Transaction, (transaction) => transaction.webhooks)
   @JoinColumn({
     name: 'object_id',

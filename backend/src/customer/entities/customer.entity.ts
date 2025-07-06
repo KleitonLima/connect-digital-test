@@ -1,6 +1,7 @@
 import { Entity, PrimaryColumn, Column, OneToMany, OneToOne } from 'typeorm';
 import { Transaction } from '../../transaction/entities/transaction.entity';
 import { Address } from '../../address/entities/address.entity';
+import { IsOptional } from 'class-validator';
 
 @Entity()
 export class Customer {
@@ -31,9 +32,11 @@ export class Customer {
   @Column()
   document_number: string;
 
+  @IsOptional()
   @OneToMany(() => Transaction, (transaction) => transaction.customer)
   transactions: Transaction[];
 
+  @IsOptional()
   @OneToOne(() => Address, (address) => address.customer)
   address: Address;
 }

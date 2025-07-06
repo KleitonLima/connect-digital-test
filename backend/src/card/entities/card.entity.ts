@@ -1,11 +1,6 @@
-import {
-  Entity,
-  PrimaryColumn,
-  Column,
-  CreateDateColumn,
-  OneToMany,
-} from 'typeorm';
+import { Entity, PrimaryColumn, Column, OneToMany } from 'typeorm';
 import { Transaction } from '../../transaction/entities/transaction.entity';
+import { IsOptional } from 'class-validator';
 
 @Entity()
 export class Card {
@@ -30,9 +25,10 @@ export class Card {
   @Column({ type: 'boolean', default: true })
   reusable: boolean;
 
-  @CreateDateColumn()
+  @Column({ type: 'date' })
   created_at: Date;
 
+  @IsOptional()
   @OneToMany(() => Transaction, (transaction) => transaction.card)
   transactions: Transaction[];
 }

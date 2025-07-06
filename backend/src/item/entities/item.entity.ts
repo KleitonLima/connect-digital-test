@@ -6,6 +6,7 @@ import {
   JoinColumn,
 } from 'typeorm';
 import { Transaction } from '../../transaction/entities/transaction.entity';
+import { IsOptional } from 'class-validator';
 
 @Entity()
 export class Item {
@@ -30,6 +31,7 @@ export class Item {
   @Column({ type: 'int' })
   transaction_id: number;
 
+  @IsOptional()
   @ManyToOne(() => Transaction, (transaction) => transaction.items)
   @JoinColumn({ name: 'transaction_id' })
   transaction: Transaction;
