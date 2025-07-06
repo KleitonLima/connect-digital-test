@@ -1,98 +1,76 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Teste Connect Digital
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+    por Kleiton Lima
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## O teste consiste em uma api que:
 
-## Description
+- possui um endpoint capaz de receber um webhook, tratar e salvar os dados
+- possui um endpoint para pesquisa onde é possível pesquisar por vários campos
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Requisitos para execução
 
-## Project setup
+- Node.js versão 22+
+- Docker Desktop e Docker CLI
 
-```bash
-$ npm install
-```
+## Como executar a aplicação
 
-## Compile and run the project
+1. Abra o terminal na pasta onde deseja criar uma cópia do repositório.
 
-```bash
-# development
-$ npm run start
+2. Clone o repositório em sua máquina:
 
-# watch mode
-$ npm run start:dev
+   ```
+   git clone https://github.com/KleitonLima/connect-digital-test.git
+   ```
 
-# production mode
-$ npm run start:prod
-```
+3. Entre no diretório clonado:
 
-## Run tests
+   ```
+   cd connect-digital-test
+   ```
 
-```bash
-# unit tests
-$ npm run test
+4. Transforme o .env.example em .env
+   ```
+   cp .env.example .env
+   ```
 
-# e2e tests
-$ npm run test:e2e
+5. Execute a criação da imagem da API e do banco de dados nos containers docker
 
-# test coverage
-$ npm run test:cov
-```
+   ```
+   docker compose up -d --build
+   ```
 
-## Deployment
+6. Acesse a API através de
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+   ```
+   http://localhost:3232/api/v0
+   ```
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+7. Acesse a documentação Swagger através de
+   ```
+   http://localhost:3232/api/v0/docs
+   ```
 
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
-```
+No passo 4 serão criadas uma imagem do banco de dados e uma da API. Em seguida, essas imagens serão usadas para criar os respectivos containers.
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+Depois de criado, serão gerados automaticamente as tabelas no banco de dados e a API e o banco estarão prontos.
 
-## Resources
+Na UI do Swagger é possível testar todos os endpoints da API.
 
-Check out a few resources that may come in handy when working with NestJS:
+Todos os endpoints já estão com os exemplos para teste, bastando apenas executar cada um deles.
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
 
-## Support
+## Tecnologias usadas
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+- **Linguagem:** <a href="https://www.typescriptlang.org/" target="_blank"><img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" height="24" /></a>
 
-## Stay in touch
+- **Backend:** <a href="https://nestjs.com/" target="_blank"><img src="https://img.shields.io/badge/NestJS-E0234E?style=for-the-badge&logo=nestjs&logoColor=white" alt="NestJS" height="24" /></a>
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- **ORM:** <a href="https://typeorm.io/" target="_blank"><img src="https://img.shields.io/badge/TypeORM-FF4785?style=for-the-badge&logo=typeorm&logoColor=white" alt="TypeORM" height="24" /></a>
 
-## License
+- **Banco de Dados:** <a href="https://www.postgresql.org/" target="_blank"><img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL" height="24" /></a>
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+- **Validação:** <a href="https://www.npmjs.com/package/class-validator" target="_blank"><img src="https://img.shields.io/badge/class--validator-ffb300?style=for-the-badge&logo=checkmarx&logoColor=white" alt="class-validator" height="24" /></a> <a href="https://www.npmjs.com/package/class-transformer" target="_blank"><img src="https://img.shields.io/badge/class--transformer-00bcd4?style=for-the-badge&logo=autodesk&logoColor=white" alt="class-transformer" height="24" /></a>
+
+- **Autenticação:** <a href="https://jwt.io/" target="_blank"><img src="https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white" alt="JWT" height="24" /></a> <a href="https://www.npmjs.com/package/bcrypt" target="_blank"><img src="https://img.shields.io/badge/bcrypt-4B8BBE?style=for-the-badge&logo=keybase&logoColor=white" alt="bcrypt" height="24" /></a>
+
+- **Documentação:** <a href="https://swagger.io/" target="_blank"><img src="https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=black" alt="Swagger" height="24" /></a>
