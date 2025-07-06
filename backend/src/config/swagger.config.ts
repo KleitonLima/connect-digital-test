@@ -8,7 +8,7 @@ export const swaggerConfig = (
   >,
 ) => {
   const docConfig = new DocumentBuilder()
-    .setTitle('API Documentation Teddy Open Finance Test')
+    .setTitle('API Documentation Connect Digital Test')
     .setVersion('0.1.0')
     .addBearerAuth()
     .build();
