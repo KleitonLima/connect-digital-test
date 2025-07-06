@@ -29,17 +29,14 @@ export class AppService {
 
   async transactionsWebhook(data: WebhookPayloadDto) {
     try {
-      // Extrair dados principais do webhook
       const transactionData = data.data;
       const { customer, card, items, splits, fee } = transactionData;
 
-      // Preparar dados do endereço
       const addressDataWithCustomerId = {
         ...customer.address,
         customerId: customer.id,
       };
 
-      // Preparar dados do cliente
       const customerData = {
         ...customer,
         address: undefined,
@@ -49,7 +46,6 @@ export class AppService {
         createdAt: customer.createdAt,
       };
 
-      // Criar registros relacionados
       const addressResult = await this.addressService.create(
         addressDataWithCustomerId,
       );
@@ -58,7 +54,6 @@ export class AppService {
 
       const cardResult = await this.cardService.create(card);
 
-      // Preparar dados da transação
       const transactionDataToSave = {
         ...transactionData,
         customer: undefined,
