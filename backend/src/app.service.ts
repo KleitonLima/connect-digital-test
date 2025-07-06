@@ -9,6 +9,7 @@ import { SplitService } from './split/split.service';
 import { FeeService } from './fee/fee.service';
 import { TransactionService } from './transaction/transaction.service';
 import { WebhookService } from './webhook/webhook.service';
+import { DatabaseService } from './database/db.service';
 
 @Injectable()
 export class AppService {
@@ -21,6 +22,7 @@ export class AppService {
     private readonly feeService: FeeService,
     private readonly transactionService: TransactionService,
     private readonly webhookService: WebhookService,
+    private readonly databaseService: DatabaseService,
   ) {}
 
   getAppStatus(): string {
@@ -28,52 +30,72 @@ export class AppService {
   }
 
   async transactionsWebhook(data: WebhookPayloadDto) {
+    const queryRunner = await this.databaseService.injectQueryRunner();
+
     try {
       const transactionData = data.data;
       const { customer, card, items, splits, fee } = transactionData;
 
-      const customerResult = await this.customerService.create({
-        ...customer,
-        documentType: customer.document.type,
-        documentNumber: customer.document.number,
-        createdAt: customer.createdAt,
-      });
+      const customerResult = await this.customerService.create(
+        {
+          ...customer,
+          documentType: customer.document.type,
+          documentNumber: customer.document.number,
+          createdAt: customer.createdAt,
+        },
+        queryRunner,
+      );
 
-      const addressResult = await this.addressService.create({
-        ...customer.address,
-        customerId: customer.id,
-      });
+      const addressResult = await this.addressService.create(
+        {
+          ...customer.address,
+          customerId: customer.id,
+        },
+        queryRunner,
+      );
 
-      const cardResult = await this.cardService.create(card);
+      const cardResult = await this.cardService.create(card, queryRunner);
 
-      const transactionResult = await this.transactionService.create({
-        ...transactionData,
-        customerId: customerResult.id,
-        cardId: cardResult?.id || null,
-      });
+      const transactionResult = await this.transactionService.create(
+        {
+          ...transactionData,
+          customerId: customerResult.id,
+          cardId: cardResult?.id || null,
+        },
+        queryRunner,
+      );
 
       const itemResults = await Promise.all(
         items.map((item) =>
-          this.itemService.create({
-            ...item,
-            transactionId: transactionResult.id,
-          }),
+          this.itemService.create(
+            {
+              ...item,
+              transactionId: transactionResult.id,
+            },
+            queryRunner,
+          ),
         ),
       );
 
       const splitResults = await Promise.all(
         splits.map((split) =>
-          this.splitService.create({
-            ...split,
-            transactionId: transactionResult.id,
-          }),
+          this.splitService.create(
+            {
+              ...split,
+              transactionId: transactionResult.id,
+            },
+            queryRunner,
+          ),
         ),
       );
 
-      const feeResult = await this.feeService.create({
-        ...fee,
-        transactionId: transactionResult.id,
-      });
+      const feeResult = await this.feeService.create(
+        {
+          ...fee,
+          transactionId: transactionResult.id,
+        },
+        queryRunner,
+      );
 
       const webhookData = {
         id: data.id,
@@ -81,7 +103,12 @@ export class AppService {
         objectId: transactionResult.id.toString(),
         url: data.url,
       };
-      const webhookResult = await this.webhookService.create(webhookData);
+      const webhookResult = await this.webhookService.create(
+        webhookData,
+        queryRunner,
+      );
+
+      await queryRunner.commitTransaction();
 
       return {
         success: true,
@@ -100,6 +127,7 @@ export class AppService {
         },
       };
     } catch (error) {
+      await queryRunner.rollbackTransaction();
       console.error('Erro ao processar webhook:', error);
 
       return {
@@ -109,6 +137,8 @@ export class AppService {
         webhookId: data.id,
         objectId: data.data?.id || null,
       };
+    } finally {
+      await queryRunner.release();
     }
   }
 
