@@ -14,7 +14,7 @@ export class Customer {
   @PrimaryColumn()
   id: number;
 
-  @Column({ nullable: true })
+  @Column({ type: 'varchar', nullable: true })
   external_ref: string | null;
 
   @Column()

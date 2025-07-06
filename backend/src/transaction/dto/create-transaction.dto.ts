@@ -54,7 +54,7 @@ export class CreateTransactionDto {
   postbackUrl?: string | null;
 
   @IsOptional()
-  metadata?: object | null;
+  metadata?: Record<string, any> | null;
 
   @IsBoolean()
   traceable: boolean;

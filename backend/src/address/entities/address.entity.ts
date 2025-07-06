@@ -12,7 +12,7 @@ export class Address {
   @Column()
   street_number: string;
 
-  @Column({ nullable: true })
+  @Column({ type: 'varchar', nullable: true })
   complement: string | null;
 
   @Column({ length: 8 })

@@ -45,11 +45,11 @@ export class Transaction {
   @Column()
   status: string;
 
-  @Column({ nullable: true })
+  @Column({ type: 'varchar', nullable: true })
   postback_url: string | null;
 
   @Column({ type: 'json', nullable: true })
-  metadata: object | null;
+  metadata: Record<string, any> | null;
 
   @Column({ type: 'boolean', default: false })
   traceable: boolean;
@@ -69,10 +69,10 @@ export class Transaction {
   @Column({ type: 'timestamp', nullable: true })
   paid_at: Date | null;
 
-  @Column({ nullable: true })
+  @Column({ type: 'varchar', nullable: true })
   ip: string | null;
 
-  @Column({ nullable: true })
+  @Column({ type: 'varchar', nullable: true })
   external_ref: string | null;
 
   @ManyToOne(() => Customer, (customer) => customer.transactions)
