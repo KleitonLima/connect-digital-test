@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, QueryRunner } from 'typeorm';
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { Customer } from './entities/customer.entity';
 
@@ -11,7 +11,10 @@ export class CustomerService {
     private readonly customerRepository: Repository<Customer>,
   ) {}
 
-  async create(createCustomerDto: CreateCustomerDto): Promise<Customer> {
+  async create(
+    createCustomerDto: CreateCustomerDto,
+    queryRunner?: QueryRunner,
+  ): Promise<Customer> {
     const {
       id,
       externalRef,
@@ -34,6 +37,9 @@ export class CustomerService {
       document_number: documentNumber,
     });
 
+    if (queryRunner) {
+      return await queryRunner.manager.save(Customer, customer);
+    }
     return await this.customerRepository.save(customer);
   }
 
