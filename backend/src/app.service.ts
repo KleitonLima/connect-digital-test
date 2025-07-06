@@ -60,7 +60,7 @@ export class AppService {
         {
           ...transactionData,
           customerId: customerResult.id,
-          cardId: cardResult?.id || null,
+          cardId: cardResult?.id,
         },
         queryRunner,
       );
@@ -135,7 +135,7 @@ export class AppService {
         message: 'Erro ao processar webhook',
         error: error.message,
         webhookId: data.id,
-        objectId: data.data?.id || null,
+        objectId: data.data?.id,
       };
     } finally {
       await queryRunner.release();
