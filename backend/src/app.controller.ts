@@ -1,5 +1,11 @@
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
-import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiOperation,
+  ApiQuery,
+  ApiResponse,
+  ApiTags,
+  ApiBody,
+} from '@nestjs/swagger';
 import { AppService } from './app.service';
 import { WebhookPayloadDto } from './dto/payload-webhook.dto';
 import { TransactionFiltersDto } from './dto/transaction-filters.dto';
@@ -17,6 +23,96 @@ export class AppController {
   @Post('transactions/webhook')
   @ApiOperation({ summary: 'Receber webhook de transação' })
   @ApiResponse({ status: 200, description: 'Webhook processado com sucesso' })
+  @ApiBody({
+    description: 'Exemplo de payload do webhook',
+    type: WebhookPayloadDto,
+    examples: {
+      exemplo: {
+        summary: 'Exemplo completo',
+        value: {
+          id: 686401,
+          type: 'transaction',
+          objectId: '282',
+          url: 'https://test.com',
+          data: {
+            id: 282,
+            amount: 10000,
+            refundedAmount: 0,
+            companyId: 2,
+            installments: 12,
+            paymentMethod: 'credit_card',
+            status: 'paid',
+            postbackUrl: null,
+            metadata: null,
+            traceable: false,
+            secureId: 'a4594817-be48-4a23-81aa-4bb01f95fe78',
+            secureUrl:
+              'https://link.compra.com.br/pagar/a4594817-be48-4a23-81aa-4bb01f95fe78',
+            createdAt: '2022-07-18T09:54:22.000Z',
+            updatedAt: '2022-07-18T09:54:22.000Z',
+            paidAt: '2022-07-18T09:54:22.000Z',
+            ip: null,
+            externalRef: null,
+            customer: {
+              id: 1,
+              externalRef: null,
+              name: 'Gabryel',
+              email: 'gabryel@hotmail.com',
+              phone: '11999999999',
+              birthdate: null,
+              createdAt: '2022-05-26T19:17:48.000Z',
+              document: {
+                number: '12345678910',
+                type: 'cpf',
+              },
+              address: {
+                street: 'Rua República Argentina',
+                streetNumber: '4214',
+                complement: null,
+                zipCode: '11065030',
+                neighborhood: 'Pompéia',
+                city: 'Santos',
+                state: 'SP',
+                country: 'BR',
+              },
+            },
+            card: {
+              id: 147,
+              brand: 'visa',
+              holderName: 'GABRYEL FERREIRA',
+              lastDigits: '1111',
+              expirationMonth: 3,
+              expirationYear: 2028,
+              reusable: true,
+              createdAt: '2022-07-17T18:08:11.000Z',
+            },
+            items: [
+              {
+                externalRef: null,
+                title: 'b456',
+                unitPrice: 100,
+                quantity: 1,
+                tangible: false,
+              },
+            ],
+            splits: [
+              {
+                recipientId: 1,
+                amount: 10000,
+                netAmount: 9400,
+              },
+            ],
+            fee: {
+              fixedAmount: 200,
+              spreadPercentage: 4,
+              estimatedFee: 600,
+              netAmount: 9400,
+            },
+          },
+        },
+      },
+    },
+  })
   async transactionsWebhook(@Body() webhookPayload: WebhookPayloadDto) {
     return await this.appService.transactionsWebhook(webhookPayload);
   }
