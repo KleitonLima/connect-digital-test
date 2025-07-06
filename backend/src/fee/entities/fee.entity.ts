@@ -1,4 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToOne,
+  JoinColumn,
+} from 'typeorm';
+import { Transaction } from '../../transaction/entities/transaction.entity';
+import { IsOptional } from 'class-validator';
 
 @Entity()
 export class Fee {
@@ -16,4 +24,12 @@ export class Fee {
 
   @Column({ type: 'int' })
   net_amount: number;
+
+  @Column({ type: 'int' })
+  transaction_id: number;
+
+  @IsOptional()
+  @OneToOne(() => Transaction, (transaction) => transaction.fee)
+  @JoinColumn({ name: 'transaction_id' })
+  transaction: Transaction;
 }

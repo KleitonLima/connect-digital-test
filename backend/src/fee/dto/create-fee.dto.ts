@@ -1,20 +1,24 @@
-import { IsInt, Min, Max } from 'class-validator';
+import { IsInt, Min, Max, IsOptional } from 'class-validator';
 
 export class CreateFeeDto {
   @IsInt()
   @Min(0)
-  fixed_amount: number;
+  fixedAmount: number;
 
   @IsInt()
   @Min(0)
   @Max(100)
-  spread_percentage: number;
+  spreadPercentage: number;
 
   @IsInt()
   @Min(0)
-  estimated_fee: number;
+  estimatedFee: number;
 
   @IsInt()
   @Min(0)
-  net_amount: number;
+  netAmount: number;
+
+  @IsOptional()
+  @IsInt()
+  transactionId?: number;
 }

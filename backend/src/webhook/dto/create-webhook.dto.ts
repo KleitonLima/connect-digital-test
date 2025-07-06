@@ -1,6 +1,9 @@
-import { IsString, IsNotEmpty, IsUrl, IsIn } from 'class-validator';
+import { IsString, IsNotEmpty, IsUrl, IsIn, IsInt } from 'class-validator';
 
 export class CreateWebhookDto {
+  @IsInt()
+  id: number;
+
   @IsString()
   @IsNotEmpty()
   @IsIn(['transaction', 'payment', 'subscription', 'refund'], {
@@ -10,7 +13,7 @@ export class CreateWebhookDto {
 
   @IsString()
   @IsNotEmpty()
-  object_id: string;
+  objectId: string;
 
   @IsString()
   @IsUrl()

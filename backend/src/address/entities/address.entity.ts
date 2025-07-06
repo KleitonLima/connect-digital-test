@@ -1,4 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToOne,
+  JoinColumn,
+} from 'typeorm';
+import { Customer } from '../../customer/entities/customer.entity';
+import { IsOptional } from 'class-validator';
 
 @Entity()
 export class Address {
@@ -11,7 +19,7 @@ export class Address {
   @Column()
   street_number: string;
 
-  @Column({ nullable: true })
+  @Column({ type: 'varchar', nullable: true })
   complement: string | null;
 
   @Column({ length: 8 })
@@ -28,4 +36,12 @@ export class Address {
 
   @Column({ length: 2 })
   country: string;
+
+  @Column({ type: 'int' })
+  customer_id: number;
+
+  @IsOptional()
+  @OneToOne(() => Customer, (customer) => customer.address)
+  @JoinColumn({ name: 'customer_id' })
+  customer: Customer;
 }

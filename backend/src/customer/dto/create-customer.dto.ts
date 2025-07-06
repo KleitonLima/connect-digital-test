@@ -1,39 +1,42 @@
 import {
+  IsInt,
   IsString,
   IsOptional,
-  IsNotEmpty,
   IsEmail,
   IsDateString,
   IsIn,
 } from 'class-validator';
 
 export class CreateCustomerDto {
-  @IsString()
+  @IsInt()
+  id: number;
+
   @IsOptional()
-  external_ref?: string | null;
+  @IsString()
+  externalRef?: string | null;
 
   @IsString()
-  @IsNotEmpty()
   name: string;
 
   @IsEmail()
-  @IsNotEmpty()
   email: string;
 
   @IsString()
-  @IsNotEmpty()
   phone: string;
 
-  @IsDateString()
   @IsOptional()
+  @IsDateString()
   birthdate?: Date | null;
 
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
   @IsIn(['cpf', 'cnpj'], { message: 'documentType must be either cpf or cnpj' })
-  document_type: string;
+  documentType?: string;
 
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
-  document_number: string;
+  documentNumber?: string;
+
+  @IsDateString()
+  createdAt: string;
 }

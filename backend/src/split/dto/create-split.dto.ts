@@ -1,9 +1,9 @@
-import { IsInt, Min } from 'class-validator';
+import { IsInt, IsOptional, Min } from 'class-validator';
 
 export class CreateSplitDto {
   @IsInt()
   @Min(1)
-  recipient_id: number;
+  recipientId: number;
 
   @IsInt()
   @Min(0)
@@ -11,5 +11,9 @@ export class CreateSplitDto {
 
   @IsInt()
   @Min(0)
-  net_amount: number;
+  netAmount: number;
+
+  @IsOptional()
+  @IsInt()
+  transactionId?: number;
 }

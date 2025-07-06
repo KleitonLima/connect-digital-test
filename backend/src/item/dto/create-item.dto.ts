@@ -1,24 +1,16 @@
-import {
-  IsString,
-  IsOptional,
-  IsNotEmpty,
-  IsInt,
-  IsBoolean,
-  Min,
-} from 'class-validator';
+import { IsString, IsOptional, IsInt, IsBoolean, Min } from 'class-validator';
 
 export class CreateItemDto {
-  @IsString()
   @IsOptional()
-  external_ref?: string | null;
+  @IsString()
+  externalRef?: string | null;
 
   @IsString()
-  @IsNotEmpty()
   title: string;
 
   @IsInt()
   @Min(0)
-  unit_price: number;
+  unitPrice: number;
 
   @IsInt()
   @Min(1)
@@ -26,4 +18,8 @@ export class CreateItemDto {
 
   @IsBoolean()
   tangible: boolean;
+
+  @IsOptional()
+  @IsInt()
+  transactionId?: number;
 }

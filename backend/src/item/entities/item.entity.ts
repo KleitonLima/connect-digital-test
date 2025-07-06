@@ -1,11 +1,19 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
+import { Transaction } from '../../transaction/entities/transaction.entity';
+import { IsOptional } from 'class-validator';
 
 @Entity()
 export class Item {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ nullable: true })
+  @Column({ type: 'varchar', nullable: true })
   external_ref: string | null;
 
   @Column()
@@ -19,4 +27,12 @@ export class Item {
 
   @Column({ type: 'boolean' })
   tangible: boolean;
+
+  @Column({ type: 'int' })
+  transaction_id: number;
+
+  @IsOptional()
+  @ManyToOne(() => Transaction, (transaction) => transaction.items)
+  @JoinColumn({ name: 'transaction_id' })
+  transaction: Transaction;
 }

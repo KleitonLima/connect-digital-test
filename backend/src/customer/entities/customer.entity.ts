@@ -1,16 +1,14 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  CreateDateColumn,
-} from 'typeorm';
+import { Entity, PrimaryColumn, Column, OneToMany, OneToOne } from 'typeorm';
+import { Transaction } from '../../transaction/entities/transaction.entity';
+import { Address } from '../../address/entities/address.entity';
+import { IsOptional } from 'class-validator';
 
 @Entity()
 export class Customer {
-  @PrimaryGeneratedColumn()
+  @PrimaryColumn()
   id: number;
 
-  @Column({ nullable: true })
+  @Column({ type: 'varchar', nullable: true })
   external_ref: string | null;
 
   @Column()
@@ -25,12 +23,20 @@ export class Customer {
   @Column({ type: 'date', nullable: true })
   birthdate: Date | null;
 
-  @CreateDateColumn()
-  created_at: Date;
+  @Column({ type: 'date', nullable: true })
+  created_at: Date | null;
 
   @Column()
   document_type: string;
 
   @Column()
   document_number: string;
+
+  @IsOptional()
+  @OneToMany(() => Transaction, (transaction) => transaction.customer)
+  transactions: Transaction[];
+
+  @IsOptional()
+  @OneToOne(() => Address, (address) => address.customer)
+  address: Address;
 }

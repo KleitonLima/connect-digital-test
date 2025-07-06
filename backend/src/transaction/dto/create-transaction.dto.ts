@@ -7,6 +7,7 @@ import {
   IsUrl,
   IsUUID,
   IsIP,
+  IsDateString,
   IsIn,
   Min,
   Max,
@@ -14,17 +15,28 @@ import {
 
 export class CreateTransactionDto {
   @IsInt()
+  id: number;
+
+  @IsInt()
   @Min(1)
   amount: number;
 
   @IsInt()
   @Min(0)
-  @IsOptional()
-  refunded_amount?: number;
+  refundedAmount: number;
 
   @IsInt()
   @Min(1)
-  company_id: number;
+  companyId: number;
+
+  @IsOptional()
+  @IsInt()
+  @Min(1)
+  customerId: number;
+
+  @IsOptional()
+  @IsInt()
+  cardId?: number | null;
 
   @IsInt()
   @Min(1)
@@ -34,9 +46,9 @@ export class CreateTransactionDto {
   @IsString()
   @IsNotEmpty()
   @IsIn(['credit_card', 'debit_card', 'pix', 'boleto'], {
-    message: 'payment_method must be credit_card, debit_card, pix, or boleto',
+    message: 'paymentMethod must be credit_card, debit_card, pix, or boleto',
   })
-  payment_method: string;
+  paymentMethod: string;
 
   @IsString()
   @IsNotEmpty()
@@ -45,36 +57,41 @@ export class CreateTransactionDto {
   })
   status: string;
 
+  @IsOptional()
   @IsString()
   @IsUrl()
-  @IsOptional()
-  postback_url?: string | null;
+  postbackUrl?: string | null;
 
   @IsOptional()
-  metadata?: object | null;
+  metadata?: Record<string, any> | null;
 
   @IsBoolean()
-  @IsOptional()
-  traceable?: boolean;
+  traceable: boolean;
 
   @IsString()
   @IsUUID()
-  secure_id: string;
+  secureId: string;
 
   @IsString()
   @IsUrl()
-  secure_url: string;
+  secureUrl: string;
 
-  @IsString()
   @IsOptional()
-  paid_at?: string | null;
+  @IsString()
+  paidAt?: string | null;
 
+  @IsOptional()
   @IsString()
   @IsIP()
-  @IsOptional()
   ip?: string | null;
 
-  @IsString()
   @IsOptional()
-  external_ref?: string | null;
+  @IsString()
+  externalRef?: string | null;
+
+  @IsDateString()
+  createdAt: string;
+
+  @IsDateString()
+  updatedAt: string;
 }

@@ -1,9 +1,11 @@
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { SplitService } from './split.service';
-import { SplitController } from './split.controller';
+import { Split } from './entities/split.entity';
 
 @Module({
-  controllers: [SplitController],
+  imports: [TypeOrmModule.forFeature([Split])],
   providers: [SplitService],
+  exports: [SplitService],
 })
 export class SplitModule {}
