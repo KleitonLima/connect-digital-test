@@ -29,12 +29,13 @@ export class CreateTransactionDto {
   @Min(1)
   companyId: number;
 
+  @IsOptional()
   @IsInt()
   @Min(1)
   customerId: number;
 
-  @IsInt()
   @IsOptional()
+  @IsInt()
   cardId?: number | null;
 
   @IsInt()
@@ -56,9 +57,9 @@ export class CreateTransactionDto {
   })
   status: string;
 
+  @IsOptional()
   @IsString()
   @IsUrl()
-  @IsOptional()
   postbackUrl?: string | null;
 
   @IsOptional()
@@ -75,17 +76,17 @@ export class CreateTransactionDto {
   @IsUrl()
   secureUrl: string;
 
-  @IsString()
   @IsOptional()
+  @IsString()
   paidAt?: string | null;
 
+  @IsOptional()
   @IsString()
   @IsIP()
-  @IsOptional()
   ip?: string | null;
 
-  @IsString()
   @IsOptional()
+  @IsString()
   externalRef?: string | null;
 
   @IsDateString()
