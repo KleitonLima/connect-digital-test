@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, QueryRunner } from 'typeorm';
 import { CreateSplitDto } from './dto/create-split.dto';
 import { Split } from './entities/split.entity';
 
@@ -11,7 +11,10 @@ export class SplitService {
     private readonly splitRepository: Repository<Split>,
   ) {}
 
-  async create(createSplitDto: CreateSplitDto): Promise<Split> {
+  async create(
+    createSplitDto: CreateSplitDto,
+    queryRunner?: QueryRunner,
+  ): Promise<Split> {
     const { recipientId, amount, netAmount, transactionId } = createSplitDto;
 
     const split = this.splitRepository.create({
@@ -21,6 +24,9 @@ export class SplitService {
       transaction_id: transactionId,
     });
 
+    if (queryRunner) {
+      return await queryRunner.manager.save(Split, split);
+    }
     return await this.splitRepository.save(split);
   }
 
