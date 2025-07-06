@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, QueryRunner } from 'typeorm';
 import { CreateAddressDto } from './dto/create-address.dto';
 import { Address } from './entities/address.entity';
 
@@ -11,7 +11,10 @@ export class AddressService {
     private readonly addressRepository: Repository<Address>,
   ) {}
 
-  async create(createAddressDto: CreateAddressDto): Promise<Address> {
+  async create(
+    createAddressDto: CreateAddressDto,
+    queryRunner?: QueryRunner,
+  ): Promise<Address> {
     const {
       street,
       streetNumber,
@@ -36,11 +39,9 @@ export class AddressService {
       customer_id: customerId,
     });
 
-    console.log(
-      '🚀 ~ address.service.ts:39 ~ AddressService ~ create ~ address:',
-      address,
-    );
-
+    if (queryRunner) {
+      return await queryRunner.manager.save(Address, address);
+    }
     return await this.addressRepository.save(address);
   }
 
