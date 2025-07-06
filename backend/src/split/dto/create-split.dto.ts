@@ -1,7 +1,8 @@
 import { IsInt, Min } from 'class-validator';
+import { PrimaryGeneratedColumn } from 'typeorm';
 
 export class CreateSplitDto {
-  @IsInt()
+  @PrimaryGeneratedColumn()
   id: number;
 
   @IsInt()

@@ -6,9 +6,10 @@ import {
   Length,
   Matches,
 } from 'class-validator';
+import { PrimaryGeneratedColumn } from 'typeorm';
 
 export class CreateAddressDto {
-  @IsInt()
+  @PrimaryGeneratedColumn()
   id: number;
 
   @IsString()

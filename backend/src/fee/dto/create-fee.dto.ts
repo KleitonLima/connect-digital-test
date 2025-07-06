@@ -1,7 +1,8 @@
 import { IsInt, Min, Max } from 'class-validator';
+import { PrimaryGeneratedColumn } from 'typeorm';
 
 export class CreateFeeDto {
-  @IsInt()
+  @PrimaryGeneratedColumn()
   id: number;
 
   @IsInt()
