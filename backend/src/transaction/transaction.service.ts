@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, QueryRunner } from 'typeorm';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
 import { Transaction } from './entities/transaction.entity';
 
@@ -13,6 +13,7 @@ export class TransactionService {
 
   async create(
     createTransactionDto: CreateTransactionDto,
+    queryRunner?: QueryRunner,
   ): Promise<Transaction> {
     const {
       amount,
@@ -52,6 +53,9 @@ export class TransactionService {
       external_ref: externalRef || null,
     });
 
+    if (queryRunner) {
+      return await queryRunner.manager.save(Transaction, transaction);
+    }
     return await this.transactionRepository.save(transaction);
   }
 
