@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, QueryRunner } from 'typeorm';
 import { CreateFeeDto } from './dto/create-fee.dto';
 import { Fee } from './entities/fee.entity';
 
@@ -11,7 +11,10 @@ export class FeeService {
     private readonly feeRepository: Repository<Fee>,
   ) {}
 
-  async create(createFeeDto: CreateFeeDto): Promise<Fee> {
+  async create(
+    createFeeDto: CreateFeeDto,
+    queryRunner?: QueryRunner,
+  ): Promise<Fee> {
     const {
       fixedAmount,
       spreadPercentage,
@@ -28,6 +31,9 @@ export class FeeService {
       transaction_id: transactionId,
     });
 
+    if (queryRunner) {
+      return await queryRunner.manager.save(Fee, fee);
+    }
     return await this.feeRepository.save(fee);
   }
 
