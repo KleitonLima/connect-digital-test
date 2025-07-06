@@ -25,7 +25,7 @@
 3. Entre no diretório clonado:
 
    ```
-   cd connect-digital-test
+   cd connect-digital-test/backend
    ```
 
 4. Transforme o .env.example em .env
