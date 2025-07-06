@@ -1,10 +1,6 @@
 import { IsInt, Min, Max } from 'class-validator';
-import { PrimaryGeneratedColumn } from 'typeorm';
 
 export class CreateFeeDto {
-  @PrimaryGeneratedColumn()
-  id: number;
-
   @IsInt()
   @Min(0)
   fixedAmount: number;

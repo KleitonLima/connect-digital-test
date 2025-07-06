@@ -13,7 +13,6 @@ export class FeeService {
 
   async create(createFeeDto: CreateFeeDto): Promise<Fee> {
     const {
-      id,
       fixedAmount,
       spreadPercentage,
       estimatedFee,
@@ -22,7 +21,6 @@ export class FeeService {
     } = createFeeDto;
 
     const fee = this.feeRepository.create({
-      id,
       fixed_amount: fixedAmount,
       spread_percentage: spreadPercentage,
       estimated_fee: estimatedFee,

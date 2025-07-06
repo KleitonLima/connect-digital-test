@@ -6,12 +6,8 @@ import {
   Length,
   Matches,
 } from 'class-validator';
-import { PrimaryGeneratedColumn } from 'typeorm';
 
 export class CreateAddressDto {
-  @PrimaryGeneratedColumn()
-  id: number;
-
   @IsString()
   @IsNotEmpty()
   street: string;

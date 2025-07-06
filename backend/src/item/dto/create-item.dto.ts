@@ -6,12 +6,8 @@ import {
   IsBoolean,
   Min,
 } from 'class-validator';
-import { PrimaryGeneratedColumn } from 'typeorm';
 
 export class CreateItemDto {
-  @PrimaryGeneratedColumn()
-  id: number;
-
   @IsString()
   @IsOptional()
   externalRef?: string | null;

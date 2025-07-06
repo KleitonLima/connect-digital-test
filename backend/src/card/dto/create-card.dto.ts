@@ -13,8 +13,7 @@ import {
 
 export class CreateCardDto {
   @IsInt()
-  @IsOptional()
-  id?: number;
+  id: number;
 
   @IsString()
   @IsNotEmpty()
