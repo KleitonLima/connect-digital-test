@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import paymentsService from '../../services/payments.service';
+import { IconLoader2 } from '@tabler/icons-react';
 
 const SaleCheckout = () => {
   const products = [
@@ -7,13 +9,15 @@ const SaleCheckout = () => {
     { id: 3, name: 'Produto 3', price: 300 },
   ];
   const totalPrice = products.reduce((acc, product) => acc + product.price, 0);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleGoToPayment = async () => {
     try {
-      const paymentIntent = await paymentsService.createPaymentIntent(
+      setIsLoading(true);
+      const paymentIntent = (await paymentsService.createPaymentIntent(
         totalPrice,
         'BRL'
-      ) as { id: string };
+      )) as { id: string };
 
       window.location.href = `/payment/${paymentIntent.id}`;
     } catch (error) {
@@ -83,6 +87,8 @@ const SaleCheckout = () => {
             cursor: 'pointer',
             fontSize: '16px',
             transition: 'background-color 0.3s ease',
+            height: '50px',
+            width: '170px',
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.backgroundColor = '#45a020';
@@ -96,7 +102,17 @@ const SaleCheckout = () => {
             e.currentTarget.style.boxShadow = 'none';
           }}
         >
-          Pagar com PIX
+          {isLoading ? (
+            <IconLoader2
+              style={{
+                animation: 'spin 1s linear infinite',
+                display: 'inline-block',
+                verticalAlign: 'middle',
+              }}
+            />
+          ) : (
+            'Pagar com PIX'
+          )}
         </button>
       </footer>
     </main>
