@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Payment } from './entities/payment.entity';
 import { Repository } from 'typeorm';
 import { GeneratePaymentIntentDto } from './dto/generate-payment-intent.dto';
+import { gerarPayloadPix } from './utils/pix-payload.util';
 
 @Injectable()
 export class PaymentService {
@@ -14,14 +15,18 @@ export class PaymentService {
   ) {}
 
   async create(createPaymentDto: CreatePaymentDto) {
-    const { qr_code_image_base64, qr_code_copy_paste } = createPaymentDto;
+    try {
+      const { qr_code_image_base64, qr_code_copy_paste } = createPaymentDto;
 
-    const payment = this.paymentRepository.create({
-      qr_code_image_base64,
-      qr_code_copy_paste,
-    });
+      const payment = this.paymentRepository.create({
+        qr_code_image_base64,
+        qr_code_copy_paste,
+      });
 
-    await this.paymentRepository.save(payment);
+      await this.paymentRepository.save(payment);
+    } catch (error) {
+      console.error('Error creating payment:', error);
+    }
   }
 
   async generatePaymentIntentPix(
@@ -29,7 +34,16 @@ export class PaymentService {
   ): Promise<unknown> {
     const { amount } = generatePaymentIntentDto;
     try {
-      const qrCodeBase64 = await QRCode.toDataURL(amount.toString(), {
+      const chavePix = 'SUA_CHAVE_PIX_AQUI';
+
+      const payloadPix = gerarPayloadPix({
+        chave: chavePix,
+        valor: amount,
+        nomeRecebedor: 'NOME RECEBEDOR',
+        cidade: 'CIDADE',
+      });
+
+      const qrCodeBase64 = await QRCode.toDataURL(payloadPix, {
         errorCorrectionLevel: 'M',
         type: 'image/png',
         margin: 1,
@@ -40,17 +54,12 @@ export class PaymentService {
         width: 256,
       });
 
-      const qrCodeAscii = await QRCode.toString(amount.toString(), {
-        type: 'terminal',
-        small: true,
-      });
-
       const generatedQrCodes = {
         qr_code_image_base64: qrCodeBase64,
-        qr_code_copy_paste: qrCodeAscii,
+        qr_code_copy_paste: payloadPix,
       };
 
-      this.create(generatedQrCodes);
+      await this.create(generatedQrCodes);
 
       return generatedQrCodes;
     } catch (error) {
