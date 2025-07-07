@@ -3,7 +3,7 @@ import { PaymentService } from './payment.service';
 import { CreatePaymentDto } from './dto/create-payment.dto';
 import { GeneratePaymentIntentDto } from './dto/generate-payment-intent.dto';
 
-@Controller('payment')
+@Controller('payments')
 export class PaymentController {
   constructor(private readonly paymentService: PaymentService) {}
 
@@ -12,7 +12,7 @@ export class PaymentController {
     return this.paymentService.create(createPaymentDto);
   }
 
-  @Post('payments/pix')
+  @Post('pix')
   async generatePaymentIntentPix(
     @Body() generatePaymentIntentDto: GeneratePaymentIntentDto,
   ) {
