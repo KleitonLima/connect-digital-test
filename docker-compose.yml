@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:latest
+    container_name: postgres_connect_digital
+    ports:
+      - '6552:5432'
+    volumes:
+      - ./backend/db_data:/var/lib/postgresql/data
+    env_file:
+      - ./backend/.env
+    environment:
+      - TZ=America/Sao_Paulo
+
+  api:
+    build: ./backend
+    container_name: api_connect_digital
+    ports:
+      - '3232:3232'
+    env_file:
+      - ./backend/.env
+    depends_on:
+      - db
+    restart: unless-stopped
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+
+  frontend:
+    build: ./frontend
+    container_name: frontend_connect_digital
+    ports:
+      - '5173:5173'
+    depends_on:
+      - api
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - VITE_API_URL=http://localhost:3232
+
+volumes:
+  db_data:
