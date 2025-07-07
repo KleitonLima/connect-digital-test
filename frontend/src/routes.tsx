@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import SaleCheckout from './pages/Home/SaleCheckout';
+import SaleCheckout from './pages/SaleCheckout/SaleCheckout';
 
 const AppRoutes = () => {
   return (

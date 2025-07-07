@@ -1,5 +1,5 @@
 import './App.css';
-import SaleCheckout from './pages/Home/SaleCheckout';
+import SaleCheckout from './pages/SaleCheckout/SaleCheckout';
 
 function App() {
   return <SaleCheckout />;
