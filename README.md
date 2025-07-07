@@ -78,6 +78,7 @@
    ```
    http://localhost:5173
    ```
+    
 
 No passo 4 serão criadas uma imagem do banco de dados e uma da API. Em seguida, essas imagens serão usadas para criar os respectivos containers.
 
