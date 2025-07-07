@@ -3,11 +3,9 @@ import api from '../config/axios.config';
 class PaymentsService {
   async createPaymentIntent(amount: number): Promise<unknown> {
     try {
-      const response = await api.post('/payments/pix', {
-        data: { amount },
-      });
+      const response = await api.post('/payments/pix', { amount });
 
-      if (response.status !== 200) {
+      if (response.status !== 201) {
         throw new Error('Failed to create payment intent');
       }
 
