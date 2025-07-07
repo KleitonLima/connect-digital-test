@@ -2,10 +2,12 @@
 
     por Kleiton Lima
 
-## O teste consiste em uma api que:
+## O teste consiste em uma api que possui:
 
-- possui um endpoint capaz de receber um webhook, tratar e salvar os dados
-- possui um endpoint para pesquisa onde é possível pesquisar por vários campos
+- endpoint capaz de receber um webhook, tratar e salvar os dados
+- endpoint para pesquisa onde é possível pesquisar por vários campos
+- endpoint para gerar QR Code PIX
+- frontend contendo página para gerar pagamento
 
 ## Requisitos para execução
 
