@@ -11,7 +11,7 @@
 
 ## Requisitos para execução
 - Git
-- Docker Desktop e Docker CLI
+- Docker Desktop e Docker CLI em execução
 
 ## Como executar a aplicação
 
