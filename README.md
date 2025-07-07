@@ -33,19 +33,34 @@
    cp .env.example .env
    ```
 
-5. Execute a criação da imagem da API e do banco de dados nos containers docker
+5. Volte para o repositório principal e entre no repositório do frontend
+   ```
+   cd ..
+   ```
+   ```
+   cd frontend
+   ```
 
+6. Transforme o .env.example em .env
+   ```
+   cp .env.example .env
+   ```   
+
+7. Volte para o repositório principal e execute a criação da imagem da API e do banco de dados nos containers docker
+   ```
+   cd ..
+   ```
    ```
    docker compose up -d --build
    ```
 
-6. Acesse a API através de
+8. Acesse a API através de
 
    ```
    http://localhost:3232/api/v0
    ```
 
-7. Acesse a documentação Swagger através de
+9. Acesse a documentação Swagger através de
    ```
    http://localhost:3232/api/v0/docs
    ```
