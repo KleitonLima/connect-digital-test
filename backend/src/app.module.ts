@@ -12,6 +12,7 @@ import { TransactionModule } from './transaction/transaction.module';
 import { WebhookModule } from './webhook/webhook.module';
 import { AppDataSource } from './database/typeorm.db';
 import { DatabaseService } from './database/db.service';
+import { PaymentModule } from './payment/payment.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { DatabaseService } from './database/db.service';
     FeeModule,
     TransactionModule,
     WebhookModule,
+    PaymentModule,
   ],
   controllers: [AppController],
   providers: [AppService, DatabaseService],
