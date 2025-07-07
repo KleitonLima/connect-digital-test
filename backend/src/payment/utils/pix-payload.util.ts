@@ -1,6 +1,3 @@
-// Função simples para gerar um payload Pix (copia e cola) no padrão EMV
-// ATENÇÃO: Para produção, use sempre uma biblioteca validada!
-
 interface PixPayloadParams {
   chave: string;
   valor: number;
@@ -20,7 +17,6 @@ export function gerarPayloadPix({
   cidade,
   infoAdicional = '',
 }: PixPayloadParams): string {
-  // IDs do padrão EMV
   const payloadFormatIndicator = '000201';
   const merchantAccountInfo = formatField(
     '26',
@@ -36,7 +32,6 @@ export function gerarPayloadPix({
   const merchantCity = formatField('60', cidade);
   const additionalDataField = formatField('62', formatField('05', '***'));
 
-  // Monta o payload sem o CRC
   const payloadSemCRC = [
     payloadFormatIndicator,
     merchantAccountInfo,
@@ -47,17 +42,15 @@ export function gerarPayloadPix({
     merchantName,
     merchantCity,
     additionalDataField,
-    '6304', // ID do campo CRC
+    '6304',
   ]
     .filter(Boolean)
     .join('');
 
-  // Calcula o CRC16
   const crc = crc16(payloadSemCRC).toUpperCase();
   return payloadSemCRC + crc;
 }
 
-// Função para calcular o CRC16-CCITT-FALSE
 function crc16(str: string): string {
   let crc = 0xffff;
   for (const c of str) {
