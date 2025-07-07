@@ -102,7 +102,9 @@ const SaleCheckout = () => {
             e.currentTarget.style.boxShadow = 'none';
           }}
         >
-          {isLoading ? (
+          {!isLoading ? (
+            'Pagar com PIX'
+          ) : (
             <IconLoader2
               style={{
                 animation: 'spin 1s linear infinite',
@@ -110,8 +112,6 @@ const SaleCheckout = () => {
                 verticalAlign: 'middle',
               }}
             />
-          ) : (
-            'Pagar com PIX'
           )}
         </button>
       </footer>
