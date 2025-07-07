@@ -7,5 +7,12 @@ export default defineConfig({
   server: {
     host: true, // Permite conexões externas
     port: 5173,
+    hmr: {
+      port: 5173,
+      host: 'localhost',
+    },
+    watch: {
+      usePolling: true,
+    },
   },
 });
