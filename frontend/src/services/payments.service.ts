@@ -1,7 +1,10 @@
 import api from '../config/axios.config';
 
 class PaymentsService {
-  async createPaymentIntent(amount: number, currency: string) {
+  async createPaymentIntent(
+    amount: number,
+    currency: string
+  ): Promise<unknown> {
     try {
       const response = await api.post('/payments/pix', {
         data: { amount, currency },
