@@ -1,8 +1,10 @@
+import { IsOptional } from 'class-validator';
 import { Column, PrimaryGeneratedColumn, Entity } from 'typeorm';
 
 @Entity()
 export class Payment {
   @PrimaryGeneratedColumn()
+  @IsOptional()
   id: number;
 
   @Column()
