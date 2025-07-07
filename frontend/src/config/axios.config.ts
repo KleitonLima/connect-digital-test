@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { ENVCONFIG } from './env.config';
 
 const api = axios.create({
