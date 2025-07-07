@@ -10,8 +10,8 @@
 - frontend contendo página para gerar pagamento
 
 ## Requisitos para execução
-
-- Docker Desktop e Docker CLI
+- Git
+- Docker Desktop e Docker CLI em execução
 
 ## Como executar a aplicação
 
