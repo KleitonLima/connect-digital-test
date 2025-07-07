@@ -10,7 +10,4 @@ export class Payment {
 
   @Column()
   qr_code_copy_paste: string;
-
-  @Column()
-  status: string;
 }
