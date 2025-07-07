@@ -22,6 +22,24 @@ const QRModal = ({
 
   return (
     <dialog className="qr-modal">
+      <button
+        onClick={() => {
+          (document.querySelector('.qr-modal') as HTMLDialogElement).close();
+        }}
+        style={{
+          position: 'absolute',
+          top: 8,
+          right: 8,
+          background: 'transparent',
+          border: 'none',
+          fontSize: 22,
+          cursor: 'pointer',
+          color: '#888',
+        }}
+        aria-label="Fechar"
+      >
+        ×
+      </button>
       <div
         style={{
           display: 'flex',
@@ -39,7 +57,14 @@ const QRModal = ({
         <h2>Pagamento PIX</h2>
         <img src={qrCodeImage} alt="QR Code" />
         <p>Copie e cole o código abaixo para pagar:</p>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: 8,
+          }}
+        >
           <code style={{ wordBreak: 'break-all' }}>{qrCodeCopyPaste}</code>
           <button
             onClick={handleCopy}
