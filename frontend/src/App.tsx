@@ -1,8 +1,8 @@
 import './App.css';
-import Home from './pages/Home/Home';
+import SaleCheckout from './pages/Home/SaleCheckout';
 
 function App() {
-  return <Home />;
+  return <SaleCheckout />;
 }
 
 export default App;
