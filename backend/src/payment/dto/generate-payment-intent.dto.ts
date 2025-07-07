@@ -1,6 +1,7 @@
-import { IsInt } from 'class-validator';
+import { IsNumber, IsPositive } from 'class-validator';
 
 export class GeneratePaymentIntentDto {
-  @IsInt()
+  @IsNumber()
+  @IsPositive()
   amount: number;
 }
