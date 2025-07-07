@@ -15,8 +15,7 @@ const SaleCheckout = () => {
     try {
       setIsLoading(true);
       const paymentIntent = (await paymentsService.createPaymentIntent(
-        totalPrice,
-        'BRL'
+        totalPrice
       )) as { id: string };
 
       window.location.href = `/payment/${paymentIntent.id}`;
