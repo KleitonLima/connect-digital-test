@@ -11,7 +11,6 @@
 
 ## Requisitos para execução
 
-- Node.js versão 22+
 - Docker Desktop e Docker CLI
 
 ## Como executar a aplicação
