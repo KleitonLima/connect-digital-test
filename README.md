@@ -29,27 +29,33 @@
    ```
 
 4. Transforme o .env.example em .env
+
    ```
    cp .env.example .env
    ```
 
 5. Volte para o repositório principal e entre no repositório do frontend
+
    ```
    cd ..
    ```
+
    ```
    cd frontend
    ```
 
 6. Transforme o .env.example em .env
+
    ```
    cp .env.example .env
-   ```   
+   ```
 
 7. Volte para o repositório principal e execute a criação da imagem da API e do banco de dados nos containers docker
+
    ```
    cd ..
    ```
+
    ```
    docker compose up -d --build
    ```
@@ -72,7 +78,6 @@ Depois de criado, serão gerados automaticamente as tabelas no banco de dados e 
 Na UI do Swagger é possível testar todos os endpoints da API.
 
 Todos os endpoints já estão com os exemplos para teste, bastando apenas executar cada um deles.
-
 
 ## Tecnologias usadas
 
