@@ -68,8 +68,15 @@
    ```
 
 9. Acesse a documentação Swagger através de
+
    ```
    http://localhost:3232/api/v0/docs
+   ```
+
+10. Acesse o frontend através de
+
+   ```
+   http://localhost:5173
    ```
 
 No passo 4 serão criadas uma imagem do banco de dados e uma da API. Em seguida, essas imagens serão usadas para criar os respectivos containers.
