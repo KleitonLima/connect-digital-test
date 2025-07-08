@@ -35,8 +35,8 @@ services:
     volumes:
       - ./frontend:/app
       - /app/node_modules
-    environment:
-      - VITE_API_URL=http://localhost:3232
+    env_file:
+      - ./frontend/.env
 
 volumes:
   db_data:
